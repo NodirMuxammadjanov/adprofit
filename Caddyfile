@@ -1,0 +1,5 @@
+# Production'da {$APP_DOMAIN} ni real domenга almashtiring (avtomatik TLS).
+# Lokal: :80 → app:3000 reverse proxy.
+:80 {
+	reverse_proxy app:3000
+}
