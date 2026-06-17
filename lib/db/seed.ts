@@ -95,8 +95,8 @@ async function main() {
     refreshToken: encrypt("MOCK_BITRIX_REFRESH"),
     tokenExpiresAt: new Date(Date.now() + 3600 * 1000),
     pipelineId: "1",
-    qualifiedStageId: "C1:PREPARATION",
-    wonStageId: "C1:WON",
+    qualifiedStageId: "QUALIFIED", // mock CRM pipeline bosqich ID'lari bilan mos (lib/crm/mock.ts)
+    wonStageId: "WON",
     revenueField: "OPPORTUNITY",
     lastSyncedAt: new Date(),
   });
@@ -109,7 +109,7 @@ async function main() {
     isActive: true,
     fieldMapping: { full_name: "TITLE", phone: "PHONE", email: "EMAIL" },
     targetPipelineId: "1",
-    targetStageId: "C1:NEW",
+    targetStageId: "NEW",
   });
 
   // ── Ad hierarchy: 2 campaign × 2 adset × 1 ad = 4 leaf ads ──
@@ -272,7 +272,9 @@ async function main() {
           email: null,
           rawFields: { source: "lead_ads" },
           crmEntityType: "deal",
-          crmEntityId: `deal_${s.metaId}_${leadSeq}`,
+          // Status tokeni kodlanadi — mock crm-sync (mockGetDeal) seed hikoyasini
+          // (won/qualified/new) tasdiqlasin, buzmasin.
+          crmEntityId: `deal_${isWon ? "won" : isQualified ? "qual" : "new"}_${s.metaId}_${leadSeq}`,
           status: isWon ? "won" : isQualified ? "qualified" : "new",
           isQualified,
           qualifiedAt: isQualified ? dayTs : null,

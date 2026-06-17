@@ -9,6 +9,20 @@ UX/UI sayqallash bosqichi: kirish-chiqish holatlari, i18n qayta tuzilishi, Teleg
 mobil navigatsiya va ishonchlilik (error/loading) qatlamlari. Hamda birinchi avtomatik
 test qatlami (Vitest).
 
+### Tuzatildi — tavsiya signali (sifatli lid / daromad attribution)
+- **Bug:** mock CRM bosqich ID'lari (`mockGetDeal` → `QUALIFIED`/`WON`) seed
+  `crm_connections` sozlamasi (`C1:PREPARATION`/`C1:WON`) bilan mos kelmasdi → crm-sync
+  har bir lidni `is_qualified=is_won=false` qilib, dashboard va tavsiyalardagi
+  sifatli-lid/daromad signalini o'chirardi (barcha tavsiya 🟡 "Kuzat" chiqardi).
+- `lib/crm/mock.ts`: `mockGetDeal` endi dealId'dagi status tokeni bo'yicha pipeline bilan
+  izchil bosqich qaytaradi (won/qualified/new), won uchun amount/currency.
+- `lib/db/seed.ts`: `crm_connections` bosqich ID'lari mock pipeline bilan moslandi
+  (`QUALIFIED`/`WON`); lid `crmEntityId`'ga status tokeni kodlandi — crm-sync seed
+  hikoyasini buzmay tasdiqlaydi.
+- **Natija:** mock crm-sync signalni saqlaydi; tavsiyalar to'g'ri 🟢 Ko'paytir /
+  🔴 O'chir chiqaradi (`lib/crm/mock.test.ts` bilan qulflandi). Real CRM mantig'i
+  o'zgarmagan — bu faqat mock/seed izchilligi edi.
+
 ### Testlar (Vitest)
 - `vitest` devDependency qo'shildi; `pnpm test` / `pnpm test:watch`; konfiguratsiya `vitest.config.ts` (node env, `@/` alias).
 - 32 ta sof birlik testi: `lib/phone-mask` (PII niqob), `lib/metrics/range` (preset + custom oraliq, fake timer bilan deterministik), `lib/recommendations/group` (verdict guruhlash/saralash), `lib/jobs/lead` (retransfer loyiha-egaligi tekshiruvi; `db` va navbat mock qilingan).

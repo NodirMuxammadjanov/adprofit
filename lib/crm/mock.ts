@@ -36,33 +36,28 @@ function hashString(s: string): number {
 }
 
 export function mockGetDeal(dealId: string): CrmDeal {
-  const hash = hashString(dealId);
-  const bucket = hash % 4;
-
+  // Demo izchilligi: dealId ichidagi status tokeni ("won"/"qual"/"new") bo'yicha
+  // bosqich qaytariladi — seed crmEntityId'ga shu tokenni kodlaydi. Shunda crm-sync
+  // seed hikoyasini (qaysi lid sotuvga aylangan) BUZMAYDI, balki TASDIQLAYDI, va
+  // qaytarilgan bosqich ID'lari crm_connections sozlamasi bilan mos keladi.
+  // Token bo'lmasa (real lead-transfer yaratgan `deal_mock_...`) — deterministik hash.
+  const id = dealId.toLowerCase();
   let stageId: string;
-  let amount: number | null;
-  let currency: string | null;
-
-  if (bucket === 0) {
-    stageId = "NEW";
-    amount = null;
-    currency = null;
-  } else if (bucket === 1 || bucket === 2) {
-    stageId = "QUALIFIED";
-    amount = null;
-    currency = null;
-  } else {
-    stageId = "WON";
-    amount = 150 + (hash % 10) * 25;
-    currency = "USD";
+  if (id.includes("_won")) stageId = "WON";
+  else if (id.includes("_qual")) stageId = "QUALIFIED";
+  else if (id.includes("_new")) stageId = "NEW";
+  else {
+    const bucket = hashString(dealId) % 4;
+    stageId = bucket === 0 ? "NEW" : bucket === 3 ? "WON" : "QUALIFIED";
   }
 
+  const won = stageId === "WON";
   return {
     id: dealId,
     stageId,
     pipelineId: "1",
-    amount,
-    currency,
+    amount: won ? 150 + (hashString(dealId) % 10) * 25 : null,
+    currency: won ? "USD" : null,
     title: `Deal ${dealId}`,
   };
 }
