@@ -3,6 +3,10 @@ import { db } from "@/lib/db";
 import { crmConnections } from "@/lib/db/schema";
 import { decrypt, encrypt } from "@/lib/crypto";
 import type { CrmConnection } from "@/lib/db/schema";
+import {
+  deriveConnectionStatus,
+  type ConnectionStatus,
+} from "@/lib/meta/connection";
 import type { CrmAdapter } from "./adapter";
 import { getCrmAdapter } from "./registry";
 import type { CrmContext, CrmProvider, CrmTokenData } from "./types";
@@ -22,6 +26,19 @@ export async function getProjectCrmConnection(
     .where(eq(crmConnections.projectId, projectId))
     .limit(1);
   return rows[0] ?? null;
+}
+
+/**
+ * Loyiha CRM ulanishining holatini qaytaradi (active | expired) — token muddati
+ * `token_expires_at` bo'yicha. Ulanish yo'q bo'lsa null.
+ * page.tsx token muddati tugaganini aniqlash uchun shu yerdan oladi.
+ */
+export async function getProjectCrmConnectionStatus(
+  projectId: string,
+): Promise<ConnectionStatus | null> {
+  const connection = await getProjectCrmConnection(projectId);
+  if (!connection) return null;
+  return deriveConnectionStatus(connection.tokenExpiresAt);
 }
 
 /**

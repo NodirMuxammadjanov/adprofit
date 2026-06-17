@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 export type MetaAdAccount = { id: string; name: string; currency: string };
@@ -52,6 +53,7 @@ export type SelectMetaAccountInput = {
 /** Loyihaga Meta reklama hisobini biriktiradi. */
 export function useSelectMetaAccount(projectId: string) {
   const queryClient = useQueryClient();
+  const t = useTranslations("integrations");
 
   return useMutation<{ ok: true }, Error, SelectMetaAccountInput>({
     mutationFn: async (body) => {
@@ -64,7 +66,7 @@ export function useSelectMetaAccount(projectId: string) {
       return (await res.json()) as { ok: true };
     },
     onSuccess: () => {
-      toast.success("Meta hisobi biriktirildi");
+      toast.success(t("toast.metaAccountBound"));
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       queryClient.invalidateQueries({ queryKey: ["meta"] });
     },
@@ -76,6 +78,8 @@ export function useSelectMetaAccount(projectId: string) {
 
 /** Loyiha uchun Meta sinxronlashni navbatga qo'yadi. */
 export function useMetaSync(projectId: string) {
+  const t = useTranslations("integrations");
+
   return useMutation<{ ok: true; queued: true }, Error, void>({
     mutationFn: async () => {
       const res = await fetch(`/api/projects/${projectId}/meta/sync`, {
@@ -85,7 +89,7 @@ export function useMetaSync(projectId: string) {
       return (await res.json()) as { ok: true; queued: true };
     },
     onSuccess: () => {
-      toast.success("Sinxronlash boshlandi");
+      toast.success(t("toast.metaSyncDone"));
     },
     onError: (error) => {
       toast.error(error.message);

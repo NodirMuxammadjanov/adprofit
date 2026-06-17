@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 export type MetaForm = { id: string; name: string };
@@ -63,6 +64,7 @@ export type SaveLeadFormInput = {
 /** Lead formani saqlaydi (yangi yaratadi yoki yangilaydi). */
 export function useSaveLeadForm(projectId: string) {
   const queryClient = useQueryClient();
+  const t = useTranslations("integrations");
 
   return useMutation<{ leadForm: LeadForm }, Error, SaveLeadFormInput>({
     mutationFn: async (body) => {
@@ -75,7 +77,7 @@ export function useSaveLeadForm(projectId: string) {
       return (await res.json()) as { leadForm: LeadForm };
     },
     onSuccess: () => {
-      toast.success("Lead forma saqlandi");
+      toast.success(t("toast.leadFormSaved"));
       queryClient.invalidateQueries({ queryKey: ["lead-forms", projectId] });
     },
     onError: (error) => {

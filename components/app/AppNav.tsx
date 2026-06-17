@@ -7,13 +7,14 @@ import { UserButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import { ProjectSwitcher } from "@/components/app/ProjectSwitcher";
+import { MobileNav } from "@/components/app/MobileNav";
 
-type NavLink = {
+export type NavLink = {
   href: string;
   labelKey: string;
 };
 
-const NAV_LINKS: NavLink[] = [
+export const NAV_LINKS: NavLink[] = [
   { href: "/dashboard", labelKey: "nav.dashboard" },
   { href: "/recommendations", labelKey: "nav.recommendations" },
   { href: "/leads", labelKey: "nav.leads" },
@@ -22,14 +23,20 @@ const NAV_LINKS: NavLink[] = [
 
 export function AppNav({ showAccount = false }: { showAccount?: boolean }) {
   const t = useTranslations();
+  const tProjects = useTranslations("projects");
   const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-40 h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center gap-4 px-4">
+        <MobileNav />
+
         <ProjectSwitcher />
 
-        <nav className="hidden items-center gap-1 sm:flex">
+        <nav
+          aria-label={tProjects("menuLabel")}
+          className="hidden items-center gap-1 sm:flex"
+        >
           {NAV_LINKS.map((link) => {
             const isActive =
               pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -37,11 +44,12 @@ export function AppNav({ showAccount = false }: { showAccount?: boolean }) {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                  "rounded-md border-b-2 px-3 py-1.5 text-sm transition-colors",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                    ? "border-primary bg-primary/10 font-semibold text-primary"
+                    : "border-transparent font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
                 )}
               >
                 {t(link.labelKey)}
@@ -59,6 +67,7 @@ export function AppNav({ showAccount = false }: { showAccount?: boolean }) {
             />
           ) : (
             <div
+              aria-hidden="true"
               className="flex h-8 w-8 items-center justify-center rounded-full border bg-muted text-xs font-medium text-muted-foreground"
               title="Demo (dev)"
             >

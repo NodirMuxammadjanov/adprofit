@@ -1,0 +1,54 @@
+{
+  "title": "Lidlar",
+  "tableCaption": "Lidlar ro'yxati — har biri o'z reklamasiga bog'langan.",
+  "searchPlaceholder": "Ism yoki telefon bo'yicha qidirish...",
+  "filters": {
+    "all": "Hammasi",
+    "qualified": "Sifatli",
+    "won": "Sotuv",
+    "untransferred": "O'tkazilmagan"
+  },
+  "columns": {
+    "name": "Ism",
+    "phone": "Telefon",
+    "ad": "Reklama",
+    "status": "Holat",
+    "revenue": "Daromad",
+    "transfer": "O'tkazish",
+    "date": "Sana",
+    "actions": "Amallar"
+  },
+  "status": {
+    "won": "Sotuv",
+    "qualified": "Sifatli",
+    "new": "Yangi"
+  },
+  "transfer": {
+    "transferred": "O'tkazildi",
+    "failed": "O'tkazilmadi",
+    "pending": "Kutilmoqda"
+  },
+  "ad": {
+    "unknown": "Noma'lum reklama"
+  },
+  "phone": {
+    "reveal": "Telefonni ko'rsatish",
+    "hide": "Telefonni yashirish",
+    "none": "—"
+  },
+  "retransfer": {
+    "button": "Qayta yuborish",
+    "queued": "Qayta yuborish navbatga qo'yildi",
+    "error": "Qayta yuborib bo'lmadi"
+  },
+  "rowCount": "{count} ta lid ko'rsatilmoqda",
+  "capNotice": "Eng so'nggi 1000 ta lid ko'rsatilmoqda",
+  "emptyFiltered": "Filtr bo'yicha lid topilmadi.",
+  "empty": {
+    "title": "Hali lid yo'q. Birinchi Lead Ads lidi shu yerda ko'rinadi."
+  },
+  "error": {
+    "title": "Lidlarni yuklab bo'lmadi",
+    "description": "Kutilmagan xatolik yuz berdi. Qayta urinib ko'ring."
+  }
+}

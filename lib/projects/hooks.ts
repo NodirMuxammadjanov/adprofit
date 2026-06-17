@@ -36,6 +36,11 @@ export function useProjects() {
       if (!res.ok) await parseError(res);
       return (await res.json()) as ProjectsResponse;
     },
+    // Joriy-loyiha holati tez eskirsin (almashganda eski mijoz ko'rinmasin).
+    // Agressiv yangilik faqat shu yengil so'rovga tegishli — og'irroq integratsiya
+    // so'rovlari (meta/crm/lead-forms) global standart staleTime'dan foydalanadi.
+    staleTime: 5_000,
+    refetchOnWindowFocus: true,
   });
 }
 
@@ -80,9 +85,10 @@ export function useSetCurrentProject() {
       return (await res.json()) as { ok: true };
     },
     onSuccess: () => {
+      // Joriy-loyiha ro'yxatini bekor qilamiz; server komponentlarni qayta
+      // yangilash (router.refresh) va boshqa keshlarni bekor qilish chaqiruvchida
+      // (ProjectSwitcher) bajariladi — bu yerda to'liq sahifa qayta yuklanmaydi.
       queryClient.invalidateQueries({ queryKey: ["projects"] });
-      // Server komponentlar yangi joriy-loyiha cookie'sini qayta o'qishi uchun
-      window.location.reload();
     },
     onError: (error) => {
       toast.error(error.message);

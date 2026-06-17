@@ -35,12 +35,12 @@
     --input: 220 13% 91%;
     --ring: 243 75% 59%;
 
-    /* Svetofor */
-    --scale: 142 71% 37%; /* #16A34A yashil — ko'paytir/foyda */
+    /* Svetofor — WCAG AA: oq matn ushbu fonlarda >= 4.5:1 kontrastga ega. */
+    --scale: 142 72% 29%; /* yashil — ko'paytir/foyda */
     --scale-foreground: 0 0% 100%;
-    --kill: 0 72% 51%; /* #DC2626 qizil — o'chir/zarar */
+    --kill: 0 72% 45%; /* qizil — o'chir/zarar */
     --kill-foreground: 0 0% 100%;
-    --watch: 32 95% 44%; /* #D97706 sariq — kuzat/data kam */
+    --watch: 25 90% 33%; /* sariq/jigarrang — kuzat/data kam */
     --watch-foreground: 0 0% 100%;
 
     --radius: 0.5rem; /* 8px */
@@ -58,5 +58,16 @@
   /* Jadval raqamlari tik ustun bo'lib tursin */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+  }
+
+  /*
+   * Global fokus ko'rinishi (04-ui-ux accessibility): klaviaturadan
+   * boshqarganda har bir interaktiv element ko'rinadigan halqa ko'rsatadi.
+   * --ring tokeni ishlatiladi; sichqoncha bosishida (mouse) chiqmaydi.
+   */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: var(--radius);
   }
 }

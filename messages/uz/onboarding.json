@@ -1,0 +1,64 @@
+{
+  "title": "AdProfit'ga xush kelibsiz",
+  "subtitle": "Birinchi mijozingizni 10 daqiqada ulang — keyin dashboard o'zi ishlay boshlaydi.",
+  "welcome": "Salom, {name}!",
+  "resumeNote": "Oldingi sozlashni davom ettiramiz — to'xtagan joyingizdan boshlaymiz.",
+  "loadingProject": "Loyiha tayyorlanmoqda...",
+  "stepper": {
+    "listLabel": "Onboarding qadamlari",
+    "project": "Loyiha",
+    "meta": "Meta",
+    "crm": "CRM",
+    "lead": "Lead transfer",
+    "done": "bajarildi",
+    "current": "joriy qadam",
+    "upcoming": "kutilmoqda"
+  },
+  "nav": {
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "finish": "Yakunlash",
+    "skip": "Hozircha o'tkazib turish"
+  },
+  "steps": {
+    "project": {
+      "title": "Mijoz loyihasini yarating",
+      "subtitle": "Nima beradi: har bir mijoz uchun alohida loyiha — statistikasi aralashmaydi.",
+      "motivation": "Boshlash uchun atigi bitta nom kifoya. Keyinroq uni o'zgartirsangiz bo'ladi.",
+      "submit": "Yaratish va davom etish"
+    },
+    "meta": {
+      "title": "Meta Ads'ni ulang",
+      "subtitle": "Nima beradi: sarf, campaign, ad set va reklama statistikasi shu yerdan tortiladi.",
+      "motivation": "Meta ulangach, qaysi reklama qancha sarflayotganini bir joyda ko'rasiz."
+    },
+    "crm": {
+      "title": "CRM'ni ulang",
+      "subtitle": "Nima beradi: sifatli lid va sotuvlar tortiladi — daromad va ROAS shundan hisoblanadi.",
+      "motivation": "CRM bo'lmasa daromad ko'rinmaydi. Pipeline va bosqichlarni tanlang."
+    },
+    "lead": {
+      "title": "Lead Ads transferini sozlang",
+      "subtitle": "Nima beradi: FB formalardan kelgan lidlar avtomatik CRM'ga tushadi.",
+      "motivation": "Har bir lid qaysi reklamadan kelganini bilib turasiz — qo'lda kiritish shart emas."
+    }
+  },
+  "banner": {
+    "metaError": "Meta ulanishi bekor qilindi yoki xato yuz berdi. Qayta urinib ko'ring.",
+    "crmError": "CRM ulanishi bekor qilindi yoki xato yuz berdi. Qayta urinib ko'ring.",
+    "metaConnected": "Meta ulandi. Endi reklama hisobi va Facebook Page'ni tanlang.",
+    "crmConnected": "CRM ulandi. Endi pipeline va bosqichlarni tanlang."
+  },
+  "completion": {
+    "title": "Tabriklaymiz! Sinxronlash boshlandi",
+    "subtitle": "Birinchi ma'lumotlar tortilmoqda — bu bir-ikki daqiqa olishi mumkin.",
+    "body": "Hammasi tayyor. Endi dashboard'da reklamalaringiz foydasini kuzatishingiz mumkin.",
+    "syncing": "Sinxronlash boshlanmoqda...",
+    "goToDashboard": "Dashboard'ga o'tish",
+    "retry": "Sinxronlashni qayta urinish"
+  },
+  "error": {
+    "title": "Onboarding'da xatolik yuz berdi",
+    "description": "Kutilmagan xatolik yuz berdi. Qayta urinib ko'ring."
+  }
+}

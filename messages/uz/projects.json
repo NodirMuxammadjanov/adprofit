@@ -1,0 +1,18 @@
+{
+  "switcherLabel": "Loyihani almashtirish",
+  "switcherEmptyTrigger": "Yangi loyiha qo‘shing",
+  "listLabel": "Loyihalar",
+  "empty": "Hozircha loyiha yo‘q",
+  "emptyHint": "Boshlash uchun birinchi loyihangizni qo‘shing.",
+  "switched": "Loyiha almashtirildi",
+  "menuLabel": "Asosiy navigatsiya",
+  "errorTitle": "Xatolik yuz berdi",
+  "errorBody": "Nimadir noto‘g‘ri ketdi. Qayta urinib ko‘ring.",
+  "create": {
+    "description": "Yangi mijoz/loyiha qo‘shing va unga o‘ting.",
+    "nameLabel": "Mijoz nomi",
+    "namePlaceholder": "mas. Mars reklama",
+    "nameRequired": "Loyiha nomini kiriting",
+    "currencyLabel": "Valyuta"
+  }
+}

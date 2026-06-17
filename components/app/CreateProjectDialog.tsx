@@ -33,6 +33,7 @@ export function CreateProjectDialog({
   onOpenChange,
 }: CreateProjectDialogProps) {
   const t = useTranslations();
+  const tProjects = useTranslations("projects");
   const createProject = useCreateProject();
 
   const [name, setName] = useState("");
@@ -54,7 +55,7 @@ export function CreateProjectDialog({
     event.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Loyiha nomini kiriting");
+      setError(tProjects("create.nameRequired"));
       return;
     }
     setError(null);
@@ -74,14 +75,12 @@ export function CreateProjectDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t("nav.newProject")}</DialogTitle>
-          <DialogDescription>
-            Yangi mijoz/loyiha qo&apos;shing va unga o&apos;ting.
-          </DialogDescription>
+          <DialogDescription>{tProjects("create.description")}</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="project-name">Mijoz nomi</Label>
+            <Label htmlFor="project-name">{tProjects("create.nameLabel")}</Label>
             <Input
               id="project-name"
               value={name}
@@ -89,7 +88,7 @@ export function CreateProjectDialog({
                 setName(event.target.value);
                 if (error) setError(null);
               }}
-              placeholder="mas. Mars reklama"
+              placeholder={tProjects("create.namePlaceholder")}
               autoFocus
               disabled={createProject.isPending}
             />
@@ -99,7 +98,7 @@ export function CreateProjectDialog({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="project-currency">Valyuta</Label>
+            <Label htmlFor="project-currency">{tProjects("create.currencyLabel")}</Label>
             <Select
               value={currency}
               onValueChange={setCurrency}
