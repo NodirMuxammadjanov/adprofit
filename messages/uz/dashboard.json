@@ -1,0 +1,100 @@
+{
+  "title": "Dashboard",
+  "subtitle": "{project} · {range}",
+  "loadError": "Ma‘lumotni yuklab bo‘lmadi",
+  "loadErrorHint": "Vaqtinchalik xatolik yuz berdi. Qayta urinib ko‘ring.",
+  "range": {
+    "today": "Bugun",
+    "7d": "7 kun",
+    "30d": "30 kun",
+    "custom": "Boshqa",
+    "from": "Boshlanish",
+    "to": "Tugash",
+    "apply": "Qo‘llash",
+    "pending": "Yuklanmoqda"
+  },
+  "empty": {
+    "metaTitle": "Meta hisobi ulanmagan",
+    "metaBody": "Reklama ma‘lumotlarini ko‘rish uchun Meta reklama hisobini ulang.",
+    "metaCta": "Meta’ni ulang",
+    "syncing": "Sinxronlanmoqda, bir-ikki daqiqa kuting",
+    "noData": "Bu oraliq uchun ma‘lumot yo‘q. Boshqa sana oralig‘ini tanlang yoki keyinroq qayting."
+  },
+  "crmReminder": "Daromad ko‘rsatkichlari uchun CRM’ni ulang →",
+  "kpi": {
+    "spend": "Sarf",
+    "revenue": "Daromad",
+    "profit": "Foyda",
+    "roas": "ROAS",
+    "qualified": "Sifatli lid",
+    "qualifiedSub": "{leads} lid · {won} sotuv",
+    "leadCost": "Lid narxi",
+    "cpl": "CPL",
+    "cpql": "CPQL"
+  },
+  "table": {
+    "tabs": {
+      "campaign": "Kampaniyalar",
+      "adset": "Ad set’lar",
+      "ad": "Reklamalar"
+    },
+    "activeOnly": "Faqat aktiv",
+    "empty": "Ma‘lumot yo‘q.",
+    "unattributed": "{count} ta lid reklamaga bog‘lanmagan (jadvalga kirmaydi, lekin umumiy ko‘rsatkichda hisobga olingan).",
+    "statusActive": "Aktiv",
+    "statusPaused": "To‘xtatilgan",
+    "rowAriaLabel": "{name} — batafsil",
+    "cols": {
+      "name": "Nomi",
+      "spend": "Sarf",
+      "leads": "Lidlar",
+      "qualified": "Sifatli",
+      "won": "Sotuv",
+      "revenue": "Daromad",
+      "roas": "ROAS",
+      "cpl": "CPL",
+      "cpql": "CPQL",
+      "profit": "Foyda",
+      "cpm": "CPM",
+      "cpc": "CPC",
+      "ctr": "CTR",
+      "verdict": "Tavsiya"
+    }
+  },
+  "drawer": {
+    "sections": {
+      "finance": "Moliya",
+      "funnel": "Voronka",
+      "delivery": "Yetkazib berish"
+    },
+    "stats": {
+      "spend": "Sarf",
+      "revenue": "Daromad",
+      "profit": "Foyda",
+      "roas": "ROAS",
+      "leads": "Lidlar",
+      "qualified": "Sifatli lid",
+      "won": "Sotuv",
+      "qualityRate": "Sifat ulushi",
+      "cpl": "CPL",
+      "cpql": "CPQL",
+      "cac": "CAC",
+      "impressions": "Ko‘rsatish",
+      "clicks": "Klik",
+      "ctr": "CTR",
+      "cpc": "CPC",
+      "cpm": "CPM"
+    },
+    "children": {
+      "adset": "Ad set’lar",
+      "ad": "Reklamalar"
+    },
+    "childrenCount": "{label} ({count})",
+    "empty": "Ma‘lumot yo‘q.",
+    "level": {
+      "campaign": "Kampaniya",
+      "adset": "Ad set",
+      "ad": "Reklama"
+    }
+  }
+}

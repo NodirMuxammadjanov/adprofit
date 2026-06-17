@@ -1,0 +1,100 @@
+{
+  "title": "Дашборд",
+  "subtitle": "{project} · {range}",
+  "loadError": "Не удалось загрузить данные",
+  "loadErrorHint": "Произошла временная ошибка. Попробуйте ещё раз.",
+  "range": {
+    "today": "Сегодня",
+    "7d": "7 дней",
+    "30d": "30 дней",
+    "custom": "Другой",
+    "from": "Начало",
+    "to": "Конец",
+    "apply": "Применить",
+    "pending": "Загрузка"
+  },
+  "empty": {
+    "metaTitle": "Аккаунт Meta не подключён",
+    "metaBody": "Подключите рекламный аккаунт Meta, чтобы видеть данные по рекламе.",
+    "metaCta": "Подключить Meta",
+    "syncing": "Идёт синхронизация, подождите пару минут",
+    "noData": "За этот период нет данных. Выберите другой диапазон дат или зайдите позже."
+  },
+  "crmReminder": "Подключите CRM, чтобы видеть показатели дохода →",
+  "kpi": {
+    "spend": "Расход",
+    "revenue": "Доход",
+    "profit": "Прибыль",
+    "roas": "ROAS",
+    "qualified": "Квалифиц. лиды",
+    "qualifiedSub": "{leads} лид. · {won} продаж",
+    "leadCost": "Стоимость лида",
+    "cpl": "CPL",
+    "cpql": "CPQL"
+  },
+  "table": {
+    "tabs": {
+      "campaign": "Кампании",
+      "adset": "Группы объявлений",
+      "ad": "Объявления"
+    },
+    "activeOnly": "Только активные",
+    "empty": "Нет данных.",
+    "unattributed": "{count} лид(ов) не привязаны к рекламе (не входят в таблицу, но учтены в общих показателях).",
+    "statusActive": "Активно",
+    "statusPaused": "Приостановлено",
+    "rowAriaLabel": "{name} — подробнее",
+    "cols": {
+      "name": "Название",
+      "spend": "Расход",
+      "leads": "Лиды",
+      "qualified": "Квалифиц.",
+      "won": "Продажи",
+      "revenue": "Доход",
+      "roas": "ROAS",
+      "cpl": "CPL",
+      "cpql": "CPQL",
+      "profit": "Прибыль",
+      "cpm": "CPM",
+      "cpc": "CPC",
+      "ctr": "CTR",
+      "verdict": "Рекомендация"
+    }
+  },
+  "drawer": {
+    "sections": {
+      "finance": "Финансы",
+      "funnel": "Воронка",
+      "delivery": "Доставка"
+    },
+    "stats": {
+      "spend": "Расход",
+      "revenue": "Доход",
+      "profit": "Прибыль",
+      "roas": "ROAS",
+      "leads": "Лиды",
+      "qualified": "Квалифиц. лиды",
+      "won": "Продажи",
+      "qualityRate": "Доля качества",
+      "cpl": "CPL",
+      "cpql": "CPQL",
+      "cac": "CAC",
+      "impressions": "Показы",
+      "clicks": "Клики",
+      "ctr": "CTR",
+      "cpc": "CPC",
+      "cpm": "CPM"
+    },
+    "children": {
+      "adset": "Группы объявлений",
+      "ad": "Объявления"
+    },
+    "childrenCount": "{label} ({count})",
+    "empty": "Нет данных.",
+    "level": {
+      "campaign": "Кампания",
+      "adset": "Группа объявлений",
+      "ad": "Объявление"
+    }
+  }
+}

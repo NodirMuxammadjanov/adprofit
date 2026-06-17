@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "worker": "tsx worker/index.ts",
     "worker:dev": "tsx watch worker/index.ts",
     "db:generate": "drizzle-kit generate",
@@ -63,7 +65,8 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   },
   "packageManager": "pnpm@11.6.0"
 }

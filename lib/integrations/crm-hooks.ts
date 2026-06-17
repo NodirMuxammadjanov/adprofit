@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 export type CrmStage = { id: string; name: string };
@@ -40,6 +41,7 @@ export type CrmConfigInput = {
 /** Loyiha uchun CRM pipeline va bosqichlarini sozlaydi. */
 export function useCrmConfig(projectId: string) {
   const queryClient = useQueryClient();
+  const t = useTranslations("integrations");
 
   return useMutation<{ ok: true }, Error, CrmConfigInput>({
     mutationFn: async (body) => {
@@ -52,7 +54,7 @@ export function useCrmConfig(projectId: string) {
       return (await res.json()) as { ok: true };
     },
     onSuccess: () => {
-      toast.success("CRM sozlandi");
+      toast.success(t("toast.crmConfigured"));
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       queryClient.invalidateQueries({ queryKey: ["crm"] });
     },
@@ -64,6 +66,8 @@ export function useCrmConfig(projectId: string) {
 
 /** Loyiha uchun CRM sinxronlashni navbatga qo'yadi. */
 export function useCrmSync(projectId: string) {
+  const t = useTranslations("integrations");
+
   return useMutation<{ ok: true; queued: true }, Error, void>({
     mutationFn: async () => {
       const res = await fetch(`/api/projects/${projectId}/crm/sync`, {
@@ -73,7 +77,7 @@ export function useCrmSync(projectId: string) {
       return (await res.json()) as { ok: true; queued: true };
     },
     onSuccess: () => {
-      toast.success("CRM sinxronlash boshlandi");
+      toast.success(t("toast.crmSyncDone"));
     },
     onError: (error) => {
       toast.error(error.message);

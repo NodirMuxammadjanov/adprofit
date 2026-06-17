@@ -1,6 +1,6 @@
 import { and, eq, gte, lt, lte, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { adEntities, adMetricsDaily, leads } from "@/lib/db/schema";
+import { adEntities, adMetricsDaily, crmConnections, leads, projectMeta } from "@/lib/db/schema";
 import type { DateRange } from "./range";
 import type {
   BaseMetrics,
@@ -9,6 +9,22 @@ import type {
   EntityLevel,
   EntityRow,
 } from "./types";
+
+/**
+ * Dashboard'ning uchta bo'sh holatini ajratish uchun ulanish bayroqlari (03-app-flow).
+ * `DashboardData` tip'i `lib/metrics/types.ts`'da (bu fayl egasi emas), shuning uchun
+ * qaytuvchi tipni shu yerda kengaytiramiz — types.ts'ga tegmasdan.
+ */
+export type DashboardConnectionFlags = {
+  /** Loyihaga Meta reklama hisobi biriktirilganmi (project_meta qatori bor). */
+  metaConnected: boolean;
+  /** CRM ulangan va to'liq sozlanganmi (pipeline + qualified + won bosqichlari). */
+  crmConnected: boolean;
+  /** Meta ulangan, lekin hali birinchi sinxronlash tugamagan (data hali yo'q). */
+  syncing: boolean;
+};
+
+export type DashboardResult = DashboardData & DashboardConnectionFlags;
 
 /**
  * Attribution + aggregation qatlami.
@@ -66,8 +82,8 @@ export async function computeDashboard(
   projectId: string,
   range: DateRange,
   currency: string,
-): Promise<DashboardData> {
-  const [entities, metricRows, leadRows] = await Promise.all([
+): Promise<DashboardResult> {
+  const [entities, metricRows, leadRows, metaRows, crmRows] = await Promise.all([
     db.select().from(adEntities).where(eq(adEntities.projectId, projectId)),
     db
       .select({
@@ -104,6 +120,24 @@ export async function computeDashboard(
         ),
       )
       .groupBy(leads.adEntityId),
+    // Loyiha darajasidagi ulanish holati — bo'sh holatlarni ajratish uchun.
+    db
+      .select({
+        adAccountId: projectMeta.adAccountId,
+        lastSyncedAt: projectMeta.lastSyncedAt,
+      })
+      .from(projectMeta)
+      .where(eq(projectMeta.projectId, projectId))
+      .limit(1),
+    db
+      .select({
+        pipelineId: crmConnections.pipelineId,
+        qualifiedStageId: crmConnections.qualifiedStageId,
+        wonStageId: crmConnections.wonStageId,
+      })
+      .from(crmConnections)
+      .where(eq(crmConnections.projectId, projectId))
+      .limit(1),
   ]);
 
   const byId = new Map(entities.map((e) => [e.id, e] as const));
@@ -183,6 +217,17 @@ export async function computeDashboard(
   }
 
   const unattributedLeads = num(leadByAd.get(null)?.leads);
+  const hasData = totalsBase.spend > 0 || totalsBase.leads > 0;
+
+  // Ulanish bayroqlari (03-app-flow bo'sh holatlari).
+  const meta = metaRows[0];
+  const crm = crmRows[0];
+  const metaConnected = Boolean(meta?.adAccountId);
+  const crmConnected = Boolean(
+    crm?.pipelineId && crm?.qualifiedStageId && crm?.wonStageId,
+  );
+  // Meta ulangan, lekin hali data yo'q va birinchi sinxron tugamagan (lastSyncedAt = null).
+  const syncing = metaConnected && !hasData && meta?.lastSyncedAt == null;
 
   return {
     totals: { currency, ...totalsBase, ...derive(totalsBase) },
@@ -190,6 +235,9 @@ export async function computeDashboard(
     adsets,
     ads,
     unattributedLeads,
-    hasData: totalsBase.spend > 0 || totalsBase.leads > 0,
+    hasData,
+    metaConnected,
+    crmConnected,
+    syncing,
   };
 }

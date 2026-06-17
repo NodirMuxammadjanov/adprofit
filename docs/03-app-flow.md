@@ -35,6 +35,13 @@ Logged-out foydalanuvchi `/` (Landing)'ni ko'radi: bitta jumlali qiymat taklifi
 4. Foydalanuvchining loyihasi **yo'q** → avtomatik `/onboarding`'ga.
 5. Loyihasi **bor** → `/dashboard`'ga.
 
+> **Yangilanish (2026-06-17, implementatsiya):** `routeAfterAuth` (`lib/auth-guards.ts`) endi
+> "loyiha bormi"dan ko'ra kuchliroq tekshiradi. Loyiha bor, lekin **yadro** onboarding tugamagan
+> bo'lsa (Meta ad account + Facebook Page **va** CRM pipeline/qualified/won bosqichlari yo'q) —
+> foydalanuvchi yana `/onboarding`'ga (resume) yo'naltiriladi, `/dashboard`'ga emas. Lead transfer
+> (4-qadam) dashboardni bloklamaydi, shuning uchun routing qaroriga kirmaydi (cheksiz qamab
+> qo'ymaslik uchun). Pastdagi "Redirektlar" bo'limini ham shu mantiq bilan o'qing.
+
 ---
 
 ## Asosiy yo'nalish 1 — Onboarding (birinchi mijozni ulash)
